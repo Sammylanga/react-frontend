@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './home';
+import Login from './login';
+import SignUp from './signup';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [userName , setUserName] = useState("")
+  const [showAlert, setShowAlert] = useState(false);
+  const [login, setLogin] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/signup" element={<SignUp setLogin={setLogin} showAlert={showAlert} setShowAlert={setShowAlert}  setUserName={setUserName} userName={userName} />} />
+          <Route path="/profile" element={<Home login={login} userName={userName}/>} />
+          <Route path="/login" element={<Login setLogin={setLogin} showAlert={showAlert} setShowAlert={setShowAlert} setUserName={setUserName} userName={userName} />} />      
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
